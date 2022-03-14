@@ -1,0 +1,34 @@
+1)
+int value = 10;
+void* pvalue = value; //поинтэру должен присваиваться адрес ячейки то есть (&value)
+
+2)при выходе из функции переменная boris уничтожится, соответсвенно будет не на что ссылаться
+
+3) необходимо объявить глобальную переменную и через ifndef сделать проверку на неё
+#ifndef UNIQUE_NAME;
+/.../
+#endif
+
+#define UNIQUE_NAME;
+как объяснял препод по проге, это нужно для осуществления One Definition Rule
+ломается этот метод если уникальное имя становится неуникальным, например такое же было определено в другом хэдэре
+4)
+struct imagine {
+	double re;
+	double im;
+	imagine operator+ (const imagine& other) {
+		return { re + other.re,im + other.im };
+	}
+	imagine operator* (const imagine& other) {
+		return { re * other.re,im * other.im };
+	}
+	bool operator< (const imagine& other) {
+		return { re * re + im * im < other.re* other.re + other.im * other.im };
+	}
+	bool operator> (const imagine& other) {
+		return { re * re + im * im > other.re* other.re + other.im * other.im };
+	}
+};
+//гарантией того что объекты не иззменятся служит то, что первый объект никак не меняется, а второй применяется по константной ссылке.
+
+5) я вообще не понял задание
