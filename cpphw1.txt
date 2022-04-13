@@ -14,24 +14,45 @@ void* pvalue = value; //поинтэру должен присваиваться
 
 
 как объяснял препод по проге, это нужно для осуществления One Definition Rule
-ломается этот метод если уникальное имя становится неуникальным, например такое же было определено в другом хэдэре
+ломается этот метод если уникальное имя становится неуникальным, например такое же имя было определено в другом хэдэре
 4)
 struct Complex {
 	int re;
 	int im;
-	Complex operator+ (const Complex& other) {
+	Complex operator+ (const Complex& other) const {
 		return { re + other.re,im + other.im };
 	}
-	Complex operator* (const Complex& other) {
+	Complex operator* (const Complex& other) const {
 		return { re * other.re - im * other.im, re*other.im +other.re*im };
 	}
-	bool operator< (const Complex& other) {
+	bool operator< (const Complex& other)	 const {
 		return { re * re + im * im < other.re* other.re + other.im * other.im };
 	}
-	bool operator> (const Complex& other) {
+	bool operator> (const Complex& other) const {
 		return { re * re + im * im > other.re* other.re + other.im * other.im };
 	}
 };
 //гарантией того что объекты не иззменятся служит то, что первый объект никак не меняется, а второй применяется по константной ссылке.
+//бинарная система чисел с плавающей точкой не позволит нормально складывать числа(например 1/3 будет в десятичной системе представлена как 0,(3) и при умножении на три будет выходить 0,(9))
 
-5) я вообще не понял задание
+5)
+тип Т должен уметь копироваться и сравниваться.
+1) я заменил тип у b на конст Т тк мы его никак не меняем
+2) заменил тип у а так как мы её меняем.
+struct T{
+	int a;
+	bool operator!= (const T& other){
+	    if (this != &other)
+            {cout<<"saint-";}
+            return true;
+    }
+	void operator= (const T& other){ 
+        if (a= other.a)
+            {cout<<"Petersburg!";}
+    }
+};
+template<class T>
+void strange_assign(T& a, const T& b) {
+	if(a != b)
+		a = b;	
+}
