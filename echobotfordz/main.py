@@ -3,7 +3,7 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
 import logging
 
-TOKEN = "5254891313:AAEJ8i-OTsmUgonyhj3FHlLa9KE7_kx6CTw"
+TOKEN = "Your token"
 
 updater = Updater(token=TOKEN)
 dispatcher = updater.dispatcher
