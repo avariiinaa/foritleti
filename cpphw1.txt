@@ -11,9 +11,9 @@ void* pvalue = value; //поинтэру должен присваиваться
 
 #ifndef UNIQUE_NAME;
 /.../
-#define UNIQUE_NAME;
+#define UNIQUE_NAME();
 #endif
-
+//в другом файле можно дописать сточку #undef UNIQUE_NAME и после этого сноав включить файл где определяется макрос
 
 как объяснял препод по проге, это нужно для осуществления One Definition Rule
 ломается этот метод если уникальное имя становится неуникальным, например такое же имя было определено в другом хэдэре
@@ -42,15 +42,14 @@ struct Complex {
 1) я заменил тип у b на конст Т тк мы его никак не меняем
 2) заменил тип у а так как мы её меняем.
 struct T{
-	int a;
 	bool operator!= (const T& other){
-	    if (this != &other)
-            {cout<<"saint-";}
+            cout<<"saint-";
             return true;
     }
-	void operator= (const T& other){ 
-        if (a= other.a)
-            {cout<<"Petersburg!";}
+	T operator= (const T& other){ 
+			
+            cout<<"Petersburg!";
+			return *this;
     }
 };
 template<class T>
